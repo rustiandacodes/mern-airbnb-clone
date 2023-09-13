@@ -6,11 +6,10 @@ const RegisterPage = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  console.log(name, email, password);
 
   const handleRegisterUser = (e) => {
     e.preventDefault();
-    axios.get('http://localhost:4000');
+    axios.get(`${import.meta.env.VITE_API_URL}/register`);
   };
 
   return (
