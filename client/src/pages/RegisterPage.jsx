@@ -7,9 +7,13 @@ const RegisterPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleRegisterUser = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
-    axios.get(`${import.meta.env.VITE_API_URL}/register`);
+    axios.post('/register', {
+      name,
+      email,
+      password,
+    });
   };
 
   return (
@@ -19,7 +23,7 @@ const RegisterPage = () => {
         <form
           className="max-w-md mx-auto p-3 border rounded-xl"
           onSubmit={(e) => {
-            handleRegisterUser(e);
+            handleRegister(e);
           }}
         >
           <input type="text" placeholder="John Doe" required value={name} onChange={(e) => setName(e.target.value)} />
