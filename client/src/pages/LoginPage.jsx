@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [redirect, setRedirect] = useState(false);
   const { user, setUser } = useContext(UserContext);
-  console.log(user);
+
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
@@ -21,7 +21,7 @@ const LoginPage = () => {
     }
   };
 
-  if (redirect) {
+  if (redirect || user) {
     return <Navigate to={'/'} />;
   }
 

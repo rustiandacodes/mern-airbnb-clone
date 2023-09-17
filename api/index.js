@@ -21,23 +21,6 @@ app.use((req, res, next) => {
   next();
 });
 
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => {
-    console.log('connect on db');
-    // listen for requests
-    app.listen(4000, () => {
-      console.log('listening on port 4000!');
-    });
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
-app.get('/', (req, res) => {
-  res.json('response oke aja');
-});
-
 app.post('/register', async (req, res) => {
   const { name, email, password } = req.body;
   try {
@@ -82,3 +65,19 @@ app.get('/profile', (req, res) => {
     res.json(null);
   }
 });
+
+app.post('/logout', (req, res) => {
+  res.cookie('token', '').json(true);
+});
+
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log('connect on db');
+    app.listen(4000, () => {
+      console.log('listening on port 4000!');
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
