@@ -1,14 +1,43 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
+import Perks from '../componnent/Perks';
 
 const PlacesPage = () => {
   const { action } = useParams();
-  console.log(action);
+  const [title, setTitle] = useState();
+  const [address, setAddress] = useState();
+  const [addedPhotos, setAddedPhoto] = useState([]);
+  const [photoLink, setPhotoLinks] = useState();
+  const [description, setDescription] = useState();
+  const [perks, setPerks] = useState();
+  const [extraInfo, setExtraInfo] = useState();
+  const [checkIn, setCheckIn] = useState();
+  const [checkOut, setCheckOut] = useState();
+  const [maxGuests, setMaxGuests] = useState();
+  console.log(photoLink);
+
+  const InputHeader = (text) => {
+    return <h2 className="text-lg mt-4 font-semibold">{text}</h2>;
+  };
+
+  const InputDescription = (text) => {
+    return <p className="text-gray-500 text-sm mb-1">{text}</p>;
+  };
+
+  const PreInput = (header, desc) => {
+    return (
+      <>
+        {InputHeader(header)}
+        {InputDescription(desc)}
+      </>
+    );
+  };
+
   return (
     <>
       {action !== 'new' && (
         <div className="text-center mt-10">
-          <Link className="inline-flex gap-2 bg-primary text-white py-2 px-4 rounded-full" to={'/account/places/new'}>
+          <Link className="inline-flex gap-2 items-center bg-primary text-white py-2 px-4 rounded-full" to={'/account/places/new'}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
             </svg>
@@ -18,18 +47,15 @@ const PlacesPage = () => {
       )}
       {action === 'new' && (
         <div>
-          <form action="">
-            <h2 className="text-xl mt-4">Title</h2>
-            <p className="text-gray-500 text-sm">Title for your place should be short and catchy</p>
-            <input type="text" placeholder="title, example : My lovely apartment..." />
-            <h2 className="text-xl mt-4">Address</h2>
-            <p className="text-gray-500 text-sm">Address for this place</p>
-            <input type="text" placeholder="address" />
-            <h2 className="text-xl mt-4">Photos</h2>
-            <p className="text-gray-500 text-sm">more = better</p>
+          <form className="md:px-10">
+            {PreInput('Title', 'Title for your place should be short and catchy')}
+            <input type="text" placeholder="title, example : My lovely apartment..." value={title} onChange={(e) => setTitle(e.target.value)} />
+            {PreInput('Address', 'Address for this place')}
+            <input type="text" placeholder="address" value={address} onChange={(e) => setAddress(e.target.value)} />
+            {PreInput('Photos', 'more = better')}
             <div className="flex gap-3">
-              <input type="text" placeholder={'Add using a link ...jpg'} />
-              <button className="bg-gray rounded-2xl my-2 p-4 w-fit">Add&nbsp;photo</button>
+              <input type="text" placeholder={'Add using a link ...jpg'} value={photoLink} onChange={(e) => setPhotoLinks(e.target.value)} />
+              <button className="bg-gray rounded-2xl text-sm my-2 p-4 w-fit text-slate-600 font-semibold">Add&nbsp;photo</button>
             </div>
             <div className="mt-2 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
               <button className=" flex justify-center items-center gap-3 border bg-transparent rounded-2xl p-4 text-2xl text-gray-600">
@@ -39,9 +65,32 @@ const PlacesPage = () => {
                 <span>Upload</span>
               </button>
             </div>
-            <h2 className="text-xl mt-4">Description</h2>
-            <p className="text-gray-500 text-sm">description of the place</p>
-            <textarea></textarea>
+            {PreInput('Description', 'description of the place')}
+            <textarea value={description} onChange={(e) => setDescription(e.target.value)}></textarea>
+            {PreInput('Perks', 'select all the perks of your places')}
+            <div className="grid gap-2 grid-cols-2 md:grid-cols-3 lg:grid-cols-6">
+              <Perks selected={perks} OnChange={setPerks} />
+            </div>
+            {PreInput('Extra Info', 'house rules,etc')}
+            <textarea value={extraInfo} onChange={(e) => setExtraInfo(e.target.value)}></textarea>
+            {PreInput('Check in&out times', 'add check in and out times, remember to have some tiime to cleaning the room between guest')}
+            <div className="grid gap-3 sm:grid-cols-3">
+              <div>
+                <h3>Check in time</h3>
+                <input type="text" placeholder="14:00" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
+              </div>
+              <div>
+                <h3>Check out time</h3>
+                <input type="text" placeholder="21:00" value={checkOut} onChange={(e) => setCheckOut(e.target.value)} />
+              </div>
+              <div>
+                <h3>Max number of guests</h3>
+                <input type="number" placeholder="5" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} />
+              </div>
+            </div>
+            <div>
+              <button className="primary">Save</button>
+            </div>
           </form>
         </div>
       )}

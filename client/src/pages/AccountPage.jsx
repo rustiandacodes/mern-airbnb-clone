@@ -44,12 +44,12 @@ const AccountPage = () => {
   return (
     <>
       <div>
-        <nav className="w-full flex gap-3 mt-8 justify-center ga-2">
+        <nav className="w-full flex gap-3 mt-8 justify-center mb-10">
           <Link className={linkClasses('profile')} to={'/account'}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0zM4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632z" />
             </svg>
-            <span>My Profile</span>
+            <span className="truncate">My Profile</span>
           </Link>
           <Link className={linkClasses('bookings')} to={'/account/bookings'}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -60,7 +60,7 @@ const AccountPage = () => {
               />
             </svg>
 
-            <span>My Bookings</span>
+            <span className="truncate">My Bookings</span>
           </Link>
           <Link className={linkClasses('places')} to={'/account/places'}>
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -71,7 +71,7 @@ const AccountPage = () => {
               />
             </svg>
 
-            <span>My Accommodations</span>
+            <span className="truncate">My Accommodations</span>
           </Link>
         </nav>
         {subpage === 'profile' && (
