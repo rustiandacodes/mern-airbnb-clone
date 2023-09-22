@@ -1,10 +1,20 @@
 import React from 'react';
 
-const Perks = ({ selected, OnChange }) => {
+const Perks = ({ selected, onChange }) => {
+  const handleClick = (e) => {
+    const { checked, name } = e.target;
+    if (checked) {
+      onChange([...selected, name]);
+      console.log(selected);
+    } else {
+      onChange([...selected.filter((selectedName) => selectedName !== name)]);
+    }
+  };
+
   return (
     <>
       <label className="flex gap-2 items-center border p-4 rounded-2xl cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="Wifi" onChange={handleClick} />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
@@ -15,7 +25,7 @@ const Perks = ({ selected, OnChange }) => {
         <span>Wifi</span>
       </label>
       <label className="flex gap-2 items-center border p-4 rounded-2xl cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="free parking spot" onChange={handleClick} />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
@@ -26,7 +36,7 @@ const Perks = ({ selected, OnChange }) => {
         <span>Free Parking Spot</span>
       </label>
       <label className="flex gap-2 items-center border p-4 rounded-2xl cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="tv" onChange={handleClick} />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
@@ -37,7 +47,7 @@ const Perks = ({ selected, OnChange }) => {
         <span>TV</span>
       </label>
       <label className="flex gap-2 items-center border p-4 rounded-2xl cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="pets" onChange={handleClick} />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
@@ -48,7 +58,7 @@ const Perks = ({ selected, OnChange }) => {
         <span>Pets</span>
       </label>
       <label className="flex gap-2 items-center border p-4 rounded-2xl cursor-pointer">
-        <input type="checkbox" />
+        <input type="checkbox" name="private entrance" onChange={handleClick} />
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
           <path
             strokeLinecap="round"
