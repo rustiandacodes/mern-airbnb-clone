@@ -1,7 +1,19 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import AccountNav from '../componnent/AccountNav';
+
 const PlacesPage = () => {
+  const [places, setPlaces] = useState([]);
+
+  useEffect(() => {
+    axios.get('/places').then(({ data }) => {
+      setPlaces(data);
+    });
+  }, []);
+
+  console.log(places);
+
   return (
     <>
       <AccountNav />
@@ -14,6 +26,20 @@ const PlacesPage = () => {
           </svg>
           <span>Add new places</span>
         </Link>
+      </div>
+      <div className="mt-4">
+        {places.length > 0 &&
+          places.map((place) => (
+            <div key={place._id} className="flex gap-4 bg-gray-100 p-4 rounded-2xl">
+              <div className="w-52 h-32 bg-gray-300 grow-0">
+                <img src={import.meta.env.VITE_API_URL + '/uploads/' + place.photos[0]} alt="places" />
+              </div>
+              <div className="grow-0 shrink">
+                <h2 className="font-bold text-xl">{place.title}</h2>
+                <p className="text-sm mt-2">{place.description}</p>
+              </div>
+            </div>
+          ))}
       </div>
     </>
   );
