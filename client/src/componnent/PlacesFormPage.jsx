@@ -16,9 +16,8 @@ const PlacesFormPage = () => {
   const [checkIn, setCheckIn] = useState();
   const [checkOut, setCheckOut] = useState();
   const [maxGuests, setMaxGuests] = useState();
+  const [price, setPrice] = useState(false);
   const [redirect, setRedirect] = useState(false);
-
-  console.log({ extraInfo, checkIn, checkOut, maxGuests });
 
   if (id) {
     useEffect(() => {
@@ -32,6 +31,7 @@ const PlacesFormPage = () => {
         setCheckIn(data.checkIn);
         setCheckOut(data.checkOut);
         setMaxGuests(data.maxGuests);
+        setPrice(data.price);
       });
     }, []);
   }
@@ -66,6 +66,7 @@ const PlacesFormPage = () => {
         checkIn,
         checkOut,
         maxGuests,
+        price,
       };
       // update
       await axios.put('/places', {
@@ -85,6 +86,7 @@ const PlacesFormPage = () => {
         checkIn,
         checkOut,
         maxGuests,
+        price,
       });
       setRedirect(true);
     }
@@ -112,7 +114,7 @@ const PlacesFormPage = () => {
         {PreInput('Extra Info', 'house rules,etc')}
         <textarea value={extraInfo} onChange={(e) => setExtraInfo(e.target.value)}></textarea>
         {PreInput('Check in&out times', 'add check in and out times, remember to have some tiime to cleaning the room between guest')}
-        <div className="grid gap-3 sm:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-4">
           <div>
             <h3>Check in time</h3>
             <input type="number" placeholder="14:00" value={checkIn} onChange={(e) => setCheckIn(e.target.value)} />
@@ -124,6 +126,10 @@ const PlacesFormPage = () => {
           <div>
             <h3>Max number of guests</h3>
             <input type="number" placeholder="5" value={maxGuests} onChange={(e) => setMaxGuests(e.target.value)} />
+          </div>
+          <div>
+            <h3>Price</h3>
+            <input type="number" placeholder="200000" value={price} onChange={(e) => setPrice(e.target.value)} />
           </div>
         </div>
         <div>
