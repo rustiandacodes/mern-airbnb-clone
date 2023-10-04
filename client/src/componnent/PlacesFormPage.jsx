@@ -98,7 +98,7 @@ const PlacesFormPage = () => {
   return (
     <>
       <AccountNav />
-      <form className="md:px-10" onSubmit={savePlace}>
+      <form className="md:px-10 container mx-auto" onSubmit={savePlace}>
         {PreInput('Title', 'Title for your place should be short and catchy')}
         <input type="text" placeholder="title, example : My lovely apartment..." value={title} onChange={(e) => setTitle(e.target.value)} />
         {PreInput('Address', 'Address for this place')}

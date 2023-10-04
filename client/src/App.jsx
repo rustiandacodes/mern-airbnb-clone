@@ -8,6 +8,7 @@ import ProfilePage from './pages/ProfilePage';
 import Layout from './componnent/Layout';
 import PlacesPage from './pages/PlacesPage';
 import PlacesFormPage from './componnent/PlacesFormPage';
+import DetailPage from './pages/DetailPage';
 
 axios.defaults.baseURL = import.meta.env.VITE_API_URL;
 axios.defaults.withCredentials = true;
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/account/places" element={<PlacesPage />} />
           <Route path="/account/places/new" element={<PlacesFormPage />} />
           <Route path="/account/places/:id" element={<PlacesFormPage />} />
+          <Route path="/place/:id" element={<DetailPage />} />
         </Route>
       </Routes>
     </UserContextProvider>
