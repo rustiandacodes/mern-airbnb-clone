@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('./models/UserModel');
 const Place = require('./models/placeModel');
+const Booking = require('./models/bookingModel');
 require('dotenv').config();
 const jwt = require('jsonwebtoken');
 const cookieParser = require('cookie-parser');
@@ -163,6 +164,25 @@ app.put('/places', async (req, res) => {
       res.json('ok');
     }
   });
+});
+
+app.post('/booking', (req, res) => {
+  const { name, phone, place, checkIn, checkOut, numberOfGuests, price } = req.body;
+  Booking.create({
+    name,
+    phone,
+    place,
+    checkIn,
+    checkOut,
+    numberOfGuests,
+    price,
+  })
+    .then((doc) => {
+      res.json(doc);
+    })
+    .catch((err) => {
+      throw err;
+    });
 });
 
 mongoose

@@ -20,7 +20,7 @@ const DetailPage = () => {
 
   if (showAllPhotos) {
     return (
-      <div className="absolute inset-0 bg-black h-fit">
+      <div className="absolute inset-0 bg-black h-fit z-30">
         <div onClick={() => setAllPhotos(false)} className="fixed left-10 top-10 p-1 rounded-full opacity-70 hover:opacity-100 bg-gray-100 cursor-pointer">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
             <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" />
@@ -35,7 +35,7 @@ const DetailPage = () => {
   }
 
   return (
-    <div className="mx-auto max-w-[1100px] ">
+    <div className="mx-auto max-w-[1100px] pt-36 ">
       <h1 className="font-semibold text-2xl">{place.title}</h1>
       <Link to={'/'} className=" underline flex gap-1 my-3 items-center ">
         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">

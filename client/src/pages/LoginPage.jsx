@@ -26,7 +26,7 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="mt-4">
+    <div className="pt-36">
       <div className="absolute left-0 top-1/4 right-0">
         <h1 className="text-4xl text-center mb-4 ">Login</h1>
         <form className="max-w-md mx-auto p-3 border rounded-xl" onSubmit={(e) => handleLogin(e)}>
