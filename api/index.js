@@ -16,6 +16,16 @@ const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'DVVC1OPrPYKJpLTEkJ7RkQ4R1dw5SZxG';
 app.use(express.json());
 app.use(cookieParser());
+
+const getUserDataFromToken = (req) => {
+  return new Promise((resolve, reject) => {
+    jwt.verify(req.cookies.token, jwtSecret, {}, async (err, userData) => {
+      if (err) throw err;
+      resolve(userData);
+    });
+  });
+};
+
 app.use('/uploads', express.static(__dirname + '/uploads'));
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URI);
@@ -166,10 +176,11 @@ app.put('/places', async (req, res) => {
   });
 });
 
-app.post('/booking', (req, res) => {
-  const { name, phone, place, checkIn, checkOut, numberOfGuests, price } = req.body;
+app.post('/bookings', (req, res) => {
+  const { name, phone, place, checkIn, checkOut, numberOfGuests, price, user } = req.body;
   Booking.create({
     name,
+    user,
     phone,
     place,
     checkIn,
@@ -183,6 +194,11 @@ app.post('/booking', (req, res) => {
     .catch((err) => {
       throw err;
     });
+});
+
+app.get('/bookings', async (req, res) => {
+  const userData = await getUserDataFromToken(req);
+  res.json(await Booking.find({ user: userData.id }).populate('place'));
 });
 
 mongoose
