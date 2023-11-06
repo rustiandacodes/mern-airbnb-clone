@@ -1,7 +1,6 @@
 // const mongoose = require('mongoose');
 const User = require('../models/userModel');
 const bcrypt = require('bcryptjs');
-const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
 const bcryptSalt = bcrypt.genSaltSync(10);
 const jwtSecret = 'DVVC1OPrPYKJpLTEkJ7RkQ4R1dw5SZxG';

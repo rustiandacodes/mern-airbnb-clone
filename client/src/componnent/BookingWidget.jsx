@@ -18,8 +18,7 @@ const BookingWidget = ({ place }) => {
   }, [user]);
 
   const bookThisPlace = async () => {
-    const response = await axios.post('/bookings', { name, phone, user: user._id, place: place._id, checkIn, checkOut, numberOfGuests, price: numberOfNight * place.price });
-    console.log(response.data);
+    await axios.post('/bookings', { name, phone, user: user._id, place: place._id, checkIn, checkOut, numberOfGuests, price: numberOfNight * place.price });
   };
 
   let numberOfNight = 0;
